@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Учёт расходов — дашборд</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <header>
+      <div>
+        <p class="eyebrow">Финансы Антона</p>
+        <h1>Расходы 2026</h1>
+      </div>
+      <div class="meta">
+        <span id="lastUpdated"></span>
+        <button id="resetFilters" type="button">Сбросить фильтры</button>
+      </div>
+    </header>
+
+    <section class="controls">
+      <label>
+        Категория
+        <select id="categoryFilter">
+          <option value="">Все</option>
+        </select>
+      </label>
+      <label>
+        Подкатегория
+        <select id="subcategoryFilter">
+          <option value="">Все</option>
+        </select>
+      </label>
+      <label>
+        Период c
+        <input type="date" id="dateFrom" />
+      </label>
+      <label>
+        по
+        <input type="date" id="dateTo" />
+      </label>
+      <label class="search">
+        Поиск (магазин/позиция)
+        <input type="text" id="searchFilter" placeholder="Например: Лента" />
+      </label>
+    </section>
+
+    <section class="summary" id="summary"></section>
+
+    <section class="charts">
+      <article>
+        <div class="chart-header">
+          <h2>По неделям</h2>
+          <span class="small">ISO неделя</span>
+        </div>
+        <canvas id="weeklyChart" height="220"></canvas>
+      </article>
+      <article>
+        <div class="chart-header">
+          <h2>По месяцам</h2>
+          <span class="small">Календарные месяцы</span>
+        </div>
+        <canvas id="monthlyChart" height="220"></canvas>
+      </article>
+    </section>
+
+    <section class="table-block">
+      <div class="table-header">
+        <h2>Список трат</h2>
+        <span id="tableInfo" class="small"></span>
+      </div>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Дата</th>
+              <th>Магазин</th>
+              <th>Категория</th>
+              <th>Подкатегория</th>
+              <th>Позиция</th>
+              <th>Сумма</th>
+              <th>Заметка</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.6/dist/chart.umd.min.js" integrity="sha384-y4QwyQXu1nxzZJLdnOjFkMrDXLI4YAlnXrhIRbkIuAeGHNirMRHkRkNvztNFVQVw" crossorigin="anonymous"></script>
+    <script src="../expenses-data.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
