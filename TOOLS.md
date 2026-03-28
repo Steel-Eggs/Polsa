@@ -38,3 +38,6 @@ Skills are shared. Your setup is yours. Keeping them apart means you can update 
 ---
 
 Add whatever helps you do your job. This is your cheat sheet.
+
+### Текущие проблемы (Troubleshooting)
+- **ElevenLabs (TTS):** 16.03.2026 плагин начал генерировать аудиофайлы размером 0 байт (Telegram их не прикрепляет). Необходимо проверить: 1) остаток символов на бесплатном тарифе (10 000/мес), 2) валидность API-ключа после обновления OpenClaw, 3) настройки Voice ID.

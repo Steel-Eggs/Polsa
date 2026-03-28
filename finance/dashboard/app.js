@@ -27,6 +27,8 @@
     search: document.getElementById('searchFilter'),
     reset: document.getElementById('resetFilters'),
     summary: document.getElementById('summary'),
+    categoryStats: document.getElementById('categoryStats'),
+    categoryStatsHint: document.getElementById('categoryStatsHint'),
     tableBody: document.getElementById('tableBody'),
     tableInfo: document.getElementById('tableInfo'),
     lastUpdated: document.getElementById('lastUpdated')
@@ -42,6 +44,14 @@
       month: '2-digit',
       year: 'numeric'
     });
+  }
+
+  function pluralizeCategory(count) {
+    const mod10 = count % 10;
+    const mod100 = count % 100;
+    if (mod10 === 1 && mod100 !== 11) return `${count} категория`;
+    if (mod10 >= 2 && mod10 <= 4 && (mod100 < 10 || mod100 >= 20)) return `${count} категории`;
+    return `${count} категорий`;
   }
 
   function initFilters() {
@@ -137,6 +147,45 @@
     elements.lastUpdated.textContent = latest
       ? `Последняя запись: ${formatDate(latest.dateObj)}`
       : 'Нет активных записей';
+  }
+
+  function renderCategoryStats(data) {
+    if (!elements.categoryStats) return;
+    if (!data.length) {
+      elements.categoryStats.innerHTML = '<p class="small">Нет данных для отображения</p>';
+      if (elements.categoryStatsHint) elements.categoryStatsHint.textContent = '';
+      return;
+    }
+
+    const total = data.reduce((sum, item) => sum + item.amount, 0);
+    const map = new Map();
+    data.forEach((item) => {
+      const key = item.category || 'Без категории';
+      map.set(key, (map.get(key) || 0) + item.amount);
+    });
+    const rows = Array.from(map.entries()).sort((a, b) => b[1] - a[1]);
+    if (elements.categoryStatsHint) {
+      elements.categoryStatsHint.textContent = pluralizeCategory(rows.length);
+    }
+    const content = rows
+      .map(([cat, value]) => {
+        const percent = total ? (value / total) * 100 : 0;
+        const width = percent > 0 && percent < 1 ? 1 : percent;
+        const clampedWidth = Math.min(width, 100);
+        return `
+          <div class="category-row">
+            <div class="category-row__meta">
+              <strong>${cat}</strong>
+              <span>${formatter.format(value)} · ${percent.toFixed(1)}%</span>
+            </div>
+            <div class="category-row__bar">
+              <span style="width:${clampedWidth}%;"></span>
+            </div>
+          </div>
+        `;
+      })
+      .join('');
+    elements.categoryStats.innerHTML = content;
   }
 
   function renderTable(data) {
@@ -294,3 +343,54 @@
   initFilters();
   refreshView();
 })();
+
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('addExpenseForm');
+  if (form) {
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('newDate').value = today;
+
+    const catList = document.getElementById('catList');
+    if (window.expensesData && window.expensesData.categories) {
+      window.expensesData.categories.forEach(cat => {
+        const option = document.createElement('option');
+        option.value = cat;
+        catList.appendChild(option);
+      });
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const payload = {
+        date: document.getElementById('newDate').value,
+        vendor: document.getElementById('newVendor').value,
+        category: document.getElementById('newCategory').value,
+        subcategory: document.getElementById('newSubcat').value,
+        item: document.getElementById('newItem').value,
+        price: parseFloat(document.getElementById('newPrice').value),
+        payment_method: document.getElementById('newPayment').value,
+        notes: document.getElementById('newNotes').value
+      };
+
+      try {
+        const response = await fetch('/api/add-expense', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        
+        const result = await response.json();
+        if (result.success) {
+          alert('Добавлено! Дашборд будет перезагружен.');
+          window.location.reload();
+        } else {
+          alert('Ошибка при добавлении: ' + (result.error || 'Неизвестная ошибка'));
+        }
+      } catch (err) {
+        alert('Ошибка соединения с сервером.');
+        console.error(err);
+      }
+    });
+  }
+});

@@ -9,8 +9,9 @@ from decimal import Decimal
 from pathlib import Path
 
 FINANCE_DIR = Path('finance')
-OUTPUT_JS = FINANCE_DIR / 'expenses-data.js'
 OUTPUT_JSON = FINANCE_DIR / 'expenses-data.json'
+OUTPUT_JS = FINANCE_DIR / 'expenses-data.js'
+DASHBOARD_JS = FINANCE_DIR / 'dashboard' / 'expenses-data.js'
 
 
 def read_csv(file_path: Path) -> list[dict]:
@@ -45,7 +46,8 @@ def main() -> None:
     OUTPUT_JSON.write_text(json.dumps(combined, ensure_ascii=False, indent=2), encoding='utf-8')
     js_payload = 'window.EXPENSE_DATA = ' + OUTPUT_JSON.read_text(encoding='utf-8') + '\n'
     OUTPUT_JS.write_text(js_payload, encoding='utf-8')
-    print(f'Обновлено {OUTPUT_JS} (записей: {len(combined)})')
+    DASHBOARD_JS.write_text(js_payload, encoding='utf-8')
+    print(f'Обновлено expenses-data.js (записей: {len(combined)})')
 
 
 if __name__ == '__main__':

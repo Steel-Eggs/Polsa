@@ -1,0 +1,112 @@
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+    <meta charset="utf-8">
+    <style>
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #fff;
+    margin: 0;
+    padding: 60px;
+    width: max-content;
+}
+.tree {
+    display: inline-block;
+    text-align: center;
+}
+.tree ul {
+    padding-top: 30px; 
+    position: relative;
+    display: flex;
+    justify-content: center;
+    padding-left: 0;
+    margin: 0;
+}
+.tree li {
+    float: left; text-align: center;
+    list-style-type: none;
+    position: relative;
+    padding: 30px 4px 0 4px;
+}
+.tree li::before, .tree li::after {
+    content: '';
+    position: absolute; top: 0; right: 50%;
+    border-top: 2px solid #555;
+    width: 50%; height: 30px;
+}
+.tree li::after {
+    right: auto; left: 50%;
+    border-left: 2px solid #555;
+}
+.tree li:only-child::after, .tree li:only-child::before {
+    display: none;
+}
+.tree li:only-child { padding-top: 0; }
+.tree li:first-child::before, .tree li:last-child::after {
+    border: 0 none;
+}
+.tree li:last-child::before {
+    border-right: 2px solid #555;
+    border-radius: 0 5px 0 0;
+}
+.tree li:first-child::after {
+    border-radius: 5px 0 0 0;
+}
+.tree ul ul::before {
+    content: '';
+    position: absolute; top: 0; left: 50%;
+    border-left: 2px solid #555;
+    width: 0; height: 30px;
+}
+.card {
+    border: 2px solid #555;
+    padding: 10px;
+    color: #000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    background: #fff;
+    width: 220px;
+    height: 100px;
+    box-sizing: border-box;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    margin: 0 auto;
+}
+.name {
+    font-size: 15px;
+    font-weight: bold;
+    line-height: 1.3;
+    margin-bottom: 5px;
+}
+.dates {
+    font-size: 13px;
+    color: #444;
+}
+.unknown {
+    border-style: dashed;
+    color: #666;
+    background: #f9f9f9;
+}
+
+.card {
+    border-color: #444;
+    background-color: #fff;
+}
+.unknown {
+    border-color: #999;
+    background-color: #fafafa;
+}
+</style>
+    </head>
+    <body>
+    <div class="tree">
+        <ul>
+            <li><div class='card female'><div class='name'>Полина Дмитриевна Иванова (Ляпина)</div><div class='dates'>род. 20.05.1986</div></div><ul><li><div class='card male'><div class='name'>Дмитрий Вадимович Иванов</div><div class='dates'>род. 18.09.1960</div></div><ul><li><div class='card male'><div class='name'>Вадим Дмитриевич Иванов</div><div class='dates'>16.10.1934 - 31.05.2019</div></div><ul><li><div class='card male'><div class='name'>Дмитрий Филиппович Иванов</div><div class='dates'>15.09.1907 - 03.01.1996</div></div><ul><li><div class='card male'><div class='name'>Филипп Михайлович Иванов</div><div class='dates'>1874 - 02.1942</div></div><ul><li><div class='card male'><div class='name'>Михаил Иванов</div></div></li><li><div class='card female unknown'><div class='name'>Неизвестна</div></div></li></ul></li><li><div class='card female'><div class='name'>Агриппина Игнатьевна Никифорова</div><div class='dates'>1879 - 1910</div></div><ul><li><div class='card male'><div class='name'>Игнат Никифоров</div></div></li><li><div class='card female unknown'><div class='name'>Неизвестна</div></div></li></ul></li></ul></li><li><div class='card female'><div class='name'>Ольга Павловна Уварова</div><div class='dates'>ум. 01.11.1939</div></div><ul><li><div class='card male'><div class='name'>Павел Уваров</div><div class='dates'>ум. 1918</div></div><ul><li><div class='card male unknown'><div class='name'>Неизвестен</div></div></li><li><div class='card female unknown'><div class='name'>Неизвестна</div></div></li></ul></li><li><div class='card female unknown'><div class='name'>Неизвестна</div></div></li></ul></li></ul></li><li><div class='card female'><div class='name'>Александра Ивановна Новичкова</div><div class='dates'>род. 02.03.1933</div></div><ul><li><div class='card male'><div class='name'>Иван Ефремович Новичков</div><div class='dates'>06.06.1903 - 03.1980</div></div><ul><li><div class='card male'><div class='name'>Ефрем Новичков</div><div class='dates'>ум. 1905</div></div><ul><li><div class='card male unknown'><div class='name'>Неизвестен</div></div></li><li><div class='card female unknown'><div class='name'>Неизвестна</div></div></li></ul></li><li><div class='card female'><div class='name'>Прасковья Георгиевна Новичкова</div><div class='dates'>24.07.1867 - после 1930-х</div></div><ul><li><div class='card male'><div class='name'>Георгий</div></div></li><li><div class='card female unknown'><div class='name'>Неизвестна</div></div></li></ul></li></ul></li><li><div class='card female'><div class='name'>Марта Ивановна Крузе</div><div class='dates'>25.04.1905 - 17.04.1946</div></div><ul><li><div class='card male'><div class='name'>Иван Крузе</div></div></li><li><div class='card female'><div class='name'>Вильгельмина Андреевна Парвиайнен</div><div class='dates'>02.02.1864 - 02.04.1941</div></div><ul><li><div class='card male'><div class='name'>Андрей Парвиайнен</div></div></li><li><div class='card female unknown'><div class='name'>Неизвестна</div></div></li></ul></li></ul></li></ul></li></ul></li><li><div class='card female'><div class='name'>Елена Николаевна Чарная</div><div class='dates'>род. 15.01.1964</div></div><ul><li><div class='card male'><div class='name'>Николай Михайлович Чарный</div><div class='dates'>15.08.1927 - 25.01.1978</div></div><ul><li><div class='card male'><div class='name'>Михаил Иосифович Чарный</div><div class='dates'>1896 - 1979</div></div><ul><li><div class='card male'><div class='name'>Иосиф Чарный</div></div><ul><li><div class='card male unknown'><div class='name'>Неизвестен</div></div></li><li><div class='card female unknown'><div class='name'>Неизвестна</div></div></li></ul></li><li><div class='card female unknown'><div class='name'>Неизвестна</div></div></li></ul></li><li><div class='card female'><div class='name'>Наталья Степановна Карченя</div><div class='dates'>1899 - 1969</div></div><ul><li><div class='card male'><div class='name'>Степан Карченя</div></div><ul><li><div class='card male unknown'><div class='name'>Неизвестен</div></div></li><li><div class='card female unknown'><div class='name'>Неизвестна</div></div></li></ul></li><li><div class='card female'><div class='name'>Екатерина Ивановна Карченя</div><div class='dates'>1878 - 1931</div></div><ul><li><div class='card male'><div class='name'>Иван Карченя</div></div></li><li><div class='card female unknown'><div class='name'>Неизвестна</div></div></li></ul></li></ul></li></ul></li><li><div class='card female'><div class='name'>Аполлинария Ивановна Привалова</div><div class='dates'>02.06.1926 - 28.04.2009</div></div><ul><li><div class='card male'><div class='name'>Иван Кириллович Привалов (Кукушкин)</div><div class='dates'>29.05.1884 - 04.04.1949</div></div><ul><li><div class='card male'><div class='name'>Кирилл Егорович Кукушкин</div><div class='dates'>1852 - 17.11.1911</div></div><ul><li><div class='card male'><div class='name'>Егор Васильевич Кокушкин</div><div class='dates'>1819 - 01.12.1889</div></div><ul><li><div class='card male'><div class='name'>Василий Кокушкин</div></div></li><li><div class='card female unknown'><div class='name'>Неизвестна</div></div></li></ul></li><li><div class='card female unknown'><div class='name'>Неизвестна</div></div></li></ul></li><li><div class='card female'><div class='name'>Анна Михайловна Кукушкина</div><div class='dates'>1852 - 12.09.1891</div></div><ul><li><div class='card male'><div class='name'>Михаил Кукушкин</div></div></li><li><div class='card female unknown'><div class='name'>Неизвестна</div></div></li></ul></li></ul></li><li><div class='card female'><div class='name'>Евдокия Николаевна Афоничева</div><div class='dates'>27.07.1891 - 04.01.1975</div></div><ul><li><div class='card male'><div class='name'>Николай Иванович Афоничев</div><div class='dates'>род. 1861</div></div><ul><li><div class='card male'><div class='name'>Иван Афоничев</div></div></li><li><div class='card female unknown'><div class='name'>Неизвестна</div></div></li></ul></li><li><div class='card female'><div class='name'>Параскева Фёдоровна Афоничева</div><div class='dates'>род. 10.10.1862</div></div><ul><li><div class='card male'><div class='name'>Фёдор Михайлович</div><div class='dates'>1837 - 02.04.1900</div></div><ul><li><div class='card male'><div class='name'>Михаил</div></div></li><li><div class='card female unknown'><div class='name'>Неизвестна</div></div></li></ul></li><li><div class='card female'><div class='name'>Феодосия Михайловна</div><div class='dates'>1837 - 17.10.1909</div></div><ul><li><div class='card male'><div class='name'>Михаил</div></div></li><li><div class='card female unknown'><div class='name'>Неизвестна</div></div></li></ul></li></ul></li></ul></li></ul></li></ul></li></ul></li>
+        </ul>
+    </div>
+    </body>
+    </html>
+    
